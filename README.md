@@ -17,6 +17,9 @@
 4) To get a text with the IP when the system boots up, add the command:
      /home/pi/src/findTheSignal/audio/smstext.py <carrier> <phone-number>
 
+   to the file /etc/rc.local (remember that rc.local is unforgiving of
+   commands that do not exit 0 (e.g. return success).
+
 (To be able to send texts)
 5) Add your gmail login/password to "secrets.py" in findTheSignal/audio
  { 'login' : <login-in-quotes>, 'password' : <gmail password in quotes> }
