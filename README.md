@@ -1,4 +1,25 @@
 # findTheSignal
+#
+# remote login to this machine
+# Raspberry Pi
+
+1) DISABLE VNC option in:
+    (Click on the Raspberry)
+    Preferences->Raspberry Pi Configuration-> Interfaces
+
+2) Add xrdp and vnc4server to standard Raspberry Pi configuration
+
+     sudo apt-get install xrdp vnc4server
+
+3) Restart xrdp
+     sudo service xrdp --full-restart
+
+4) To get a text with the IP when the system boots up, add the command:
+     /home/pi/src/findTheSignal/audio/smstext.py <carrier> <phone-number>
+
+(To be able to send texts)
+5) Add your gmail login/password to "secrets.py" in findTheSignal/audio
+ { 'login' : <login-in-quotes>, 'password' : <gmail password in quotes> }
 
 Files in the audio directory are the current ones for Find The Signal
 
