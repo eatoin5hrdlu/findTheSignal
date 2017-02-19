@@ -10,7 +10,7 @@ import subprocess
 wgetip = "bash -c \"ipconfig | grep -Eo 'IPv4.*: ?([0-9]*\.){3}[0-9]*' | sed -E \\\"s/IPv4[^0-9]*(([0-9]+\.){3}[0-9]*).*/\\\\1/\\\""
 getip = ['hostname','-I']
 
-
+time.sleep(10)
 proc = subprocess.Popen(getip, stdout=subprocess.PIPE)
 myip = "   ".join(proc.stdout.read().strip().split())
 print myip
@@ -42,17 +42,19 @@ carriers = { 'a' : '@mms.att.net',
 'Einstein PCS' : '@einsteinmms.com' }
 
 car = 'vp'
-num = '9194525098'
+num = '9192208708'  # Richard the Mill Ward
 mess = myip + " FindTheSignal(pi)IP(s)\n"
 
 if (len(sys.argv) == 3) :
+    print "yes there are three args, but zero is "+str(sys.argv[0])
     car = sys.argv[1]
     num = sys.argv[2]
 else :
-    print 'smstext [atvs] NNNNNNNNNN';
+    print 'smstext [a t vp s] NNNNNNNNNN';
     print 'e.g. for [v]erizon use:   smstext v 9198675309'
     print '     for [a]tt use:      smstext a 9198675309'
     print '     for [t]mobile use: smstext t 9198675309'
+    print '     for [v]picture use: smstext vp 9198675309'
 
 # SMTP Port 25?
 server = smtplib.SMTP( "smtp.gmail.com", 587 )
@@ -67,6 +69,7 @@ print "server.sendmail( 'phagestat@gmail.com', "+num+carriers[car]+", "+msg.as_s
 
 server.sendmail('phagestat@gmail.com', num+carriers[car], msg.as_string())
 server.quit()
+print "I'm done"
 exit(0)
 
 
