@@ -21,4 +21,5 @@ ifdown wlan0
 sleep 4
 ifup wlan0
 nohup /home/pi/src/findTheSignal/audio/smstext.py vp 9192208708 2>&1 >/dev/null &
+nohup /home/pi/src/findTheSignal/audio/smstext.py vp 9199286507 2>&1 >/dev/null &
 exit 0
