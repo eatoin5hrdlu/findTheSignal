@@ -7,14 +7,15 @@ from email.mime.text       import MIMEText
 COMMASPACE = ', '
 
 import subprocess
-wgetip = "bash -c \"ipconfig | grep -Eo 'IPv4.*: ?([0-9]*\.){3}[0-9]*' | sed -E \\\"s/IPv4[^0-9]*(([0-9]+\.){3}[0-9]*).*/\\\\1/\\\""
-getip = ['hostname','-I']
+location = '/'.join(sys.argv[0].split('/')[:-1])
+os.chdir(location)
 
-time.sleep(10)
-proc = subprocess.Popen(getip, stdout=subprocess.PIPE)
-myip = "   ".join(proc.stdout.read().strip().split())
-print myip
-os.chdir('/'.join(sys.argv[0].split('/')[:-1]))
+if ( subprocess.call(location+'/newip.py') == 0 ) :
+    sys.exit(0)
+
+myip = open(location+'/lastIP','r').read()
+print "Ready to send new IP [" + myip+ "]"
+
 secrets = eval(open('secrets.py').read())
 print str(secrets)
 
@@ -70,6 +71,6 @@ print "server.sendmail( 'phagestat@gmail.com', "+num+carriers[car]+", "+msg.as_s
 server.sendmail('phagestat@gmail.com', num+carriers[car], msg.as_string())
 server.quit()
 print "I'm done"
-exit(0)
+sys.exit(0)
 
 
